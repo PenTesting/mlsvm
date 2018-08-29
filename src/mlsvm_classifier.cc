@@ -62,7 +62,8 @@ int main(int argc, char **argv)
                                               ,m_maj_full_data,m_maj_train_data,m_maj_full_NN_indices,
                                               m_maj_full_NN_dists,m_maj_WA,v_n_vol);
 
-            // bypass the classification to export the cross-validation training data (comparison with other solvers)
+            // bypass the classification to export the cross-validation training data
+            //    (comparison with other solvers)
             #if dbl_exp_train_data == 0
             //====================== create validation data ===============================
                 ETimer t_sample;
@@ -79,8 +80,10 @@ int main(int argc, char **argv)
                 Mat m_P_minority, m_P_majority;
                 std::vector<ref_results> v_ref_results;
                 Config_params::getInstance()->set_timer_start_coarsening();
-                MainRecursion multilevel_solver;        // the test data file name is initialized in the constructor of MR class
-                multilevel_solver.main(m_min_train_data, m_P_minority, m_min_WA, v_p_vol, m_maj_train_data, m_P_majority, m_maj_WA,
+                // the test data file name is initialized in the constructor of MR class
+                MainRecursion multilevel_solver;
+                multilevel_solver.main(m_min_train_data, m_P_minority,
+                                       m_min_WA, v_p_vol, m_maj_train_data, m_P_majority, m_maj_WA,
                                        v_n_vol, m_VD_p, m_VD_n, 0, v_ref_results);
                 Config_params::getInstance()->set_timer_end_refinement();
                 Refinement rf;
@@ -98,7 +101,8 @@ int main(int argc, char **argv)
             #if timer_complexity_analysis == 1
                 Config_params::getInstance()->print_coarsening_refinement_times();
             #endif
-                t_iteration.stop_timer("[MC] Vcycle (including loading datasets) at iteration ",std::to_string(i));
+                t_iteration.stop_timer("[MC] Vcycle (including loading datasets) at iteration ",
+                                       std::to_string(i));
                 //save the final metadata for models of the current k-fold   @072617-1157
                 Config_params::getInstance()->update_master_models_info();
 

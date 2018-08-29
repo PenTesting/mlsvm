@@ -1,9 +1,3 @@
-/*
- * This is the C++ version of calling FLANN which is not working properly.
- * Please use the mlsvm_save_knn which directly calls the flann.py script to calculate the Knn.
- *
- */
-
 #include "../config_params.h"
 #include <flann/flann.hpp>
 //#include <flann/util/random.h>
@@ -17,7 +11,6 @@ Config_params* Config_params::instance = NULL;
 void run_flann(Mat& m_data, Mat& m_indices, Mat& m_dists);
 
 int main(int argc, char **argv){
-//    PetscInitialize(&argc, &argv, NULL, NULL);
     PetscInitialize(NULL, NULL, NULL, NULL);
     ETimer t_all;
     //read XML parameters
@@ -26,11 +19,11 @@ int main(int argc, char **argv){
     std::string str_NN {std::to_string(Config_params::getInstance()->get_nn_number_of_neighbors())};
 //    std::string str_nn_distance_type {std::to_string(Config_params::getInstance()->get_nn_distance_type())};
     if(Config_params::getInstance()->get_nn_distance_type() != 1){
-        std::cout << "[main] Only Euclidean distance is supported using this tool, for other distances please refer to user manual. Exit!" << std::endl;
+        std::cout << "[main] Only Euclidean distance is supported using this tool"<<
+        	", for other distances please refer to user manual. Exit!" << std::endl;
         return 1;
     }
 
-//    std::string str_NN_params {" " + str_NN + " "+ str_nn_distance_type} ;
 
     Loader ld;
     if(Config_params::getInstance()->get_nn_number_of_classes() == 1){

@@ -134,65 +134,17 @@ struct BetterAcc
  * input values are large since they are best C, gamma
  * So, we use log base 2 to scale them to right dimension
  */
-//void ModelSelection::set_center(double center_C, double center_G){
-//    point_center.C = center_C;
-//    point_center.G = center_G;
-//    std::cout << "[MS][set_center] point_center.C:"<< point_center.C <<", point_center.G:" << point_center.G << std::endl;
-
-////    float min = 0.5;
-////    float max = 1.2;
-//////    double scaled_C_ = log2(center_C ) ;
-//////    double scaled_G_ = log2(center_G);
-
-
-////    C_start = log2(center_C * min);
-////    C_end   = log2(center_C * max);
-
-////    if(C_end > 10)
-////        C_end = 10;
-
-////    G_start = log2(center_G * min) ;     // if it's negative, the larger value means smaller
-////    G_end   = log2(center_G * max) ;
-
-////    if(G_end > 1.5)
-////        G_end = 1.5;
-////    std::cout << "[MS][update_center] center_C:"<< center_C <<", center_G:" << center_G << std::endl;
-////    std::cout << "[MS][update_center] C_start:"<< C_start <<", C_end:" << C_end << std::endl;
-////    std::cout << "[MS][update_center] G_start:"<< G_start <<", G_end:" << G_end << std::endl;
-//////    double Cstart = scaled_C_ - f_Ccross;
-//////    if(Cstart <= 0 )
-//////        Cstart = 1e-10;
-//////    double Cend = best_C_1st + f_Ccross;
-//////    double Gstart = best_G_1st - f_Gcross;
-//////    if(Gstart <= 0 )
-//////        Gstart = 1e-10;//
-//////    double Gend = best_G_1st + f_Gcross;
-//////    if(Gend >= 1 )
-//////        Gend = 0.9999999999;
-//}
-
-
 
 void ModelSelection::set_range(){
     if(Config_params::getInstance()->get_ms_svm_id()==1){                   //normal SVM
         range_c.min = -6.64385619 ;
         range_c.max =  6.64385619 ;
     }else{                                                      //Weighted SVM (ms_svm_id == 2)
-//        range_c.min = -6.64385619 ;
-//        range_c.max =  10.5507468 ;
         range_c.min = -10 ;
         range_c.max =  10 ;
-
     }
-//    range_g.min = -7.6439 ;
     range_g.min = -10 ;
-//    range_g.max =  1.5850 ;
     range_g.max =  10 ;
-
-//    // Assume no center is set, we set the center to (0,0) {notice that the pow2(0,0) is (1,1)}
-//    point_center.C =1;  // log2(1) == 0, later inside the ud_param_generator, log2 applied to this first
-//    point_center.G =1;
-
 }
 
 

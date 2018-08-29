@@ -25,6 +25,7 @@
 #define dbl_KF_CVC                  0           // Default 0
 #define dbl_KF_CVS                  0           // Default 0
 #define dbl_KF_FN                   0           // Default 0
+#define dbl_KF_EK                   7           // Default 0
 #define dbl_KF_CTD                  0           // Default 0
 #define dbl_KF_CTC                  0           // Default 1 [combine_two_classes_in_one]   //release 0
 #define dbl_KF_PDFI                 0           // Default 1 [prepare_data_for_iteration]   //release 0
