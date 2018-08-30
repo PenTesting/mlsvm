@@ -474,7 +474,7 @@ void CommonFuncs::addLabel2Data(Mat& m_data, Vec& v_label, Mat& m_label_data){
     // get an array of all labels
     PetscScalar     *arr_lbl;
     VecGetArray(v_label,&arr_lbl);
-    num_row = 5;
+
     for(i =0; i < num_row ; i++){
         //Insert lable
         MatSetValue(m_label_data, i, 0, arr_lbl[i],INSERT_VALUES);
