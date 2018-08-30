@@ -45,7 +45,11 @@ int main(int argc,char **args)
                         label_data_filename,PETSC_MAX_PATH_LEN,&flg);CHKERRQ(ierr);
     if (!flg) SETERRQ(PETSC_COMM_WORLD,1,
                       "Must indicate a label-data file name with the -w option");
+    // Load inputs
+    load_matrix(in_out_path, data_filename, m_data);
+    load_vec(in_out_path, label_filename, v_label);
 
+    // Check inputs
     VecGetSize(v_label, &num_row_label);
     printf("Input vector lenght is:%d\n", num_row_label);
 
@@ -54,10 +58,6 @@ int main(int argc,char **args)
 
     assert(num_row_data == num_row_label &&
            "length of data and label are not match!");
-    
-
-    load_matrix(in_out_path, data_filename, m_data);
-    load_vec(in_out_path, label_filename, v_label);
 
     CommonFuncs cf;
     cf.addLabel2Data(m_data, v_label, m_label_data);
