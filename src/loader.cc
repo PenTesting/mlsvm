@@ -136,7 +136,8 @@ Mat Loader::load_flann_binary(){
 
     ETimer t_init_WA;
     CommonFuncs cf;
-    cf.set_weight_type(Config_params::getInstance()->get_ld_weight_type(), Config_params::getInstance()->get_ld_weight_param());
+    cf.set_weight_type(Config_params::getInstance()->get_ld_weight_type(),
+                       Config_params::getInstance()->get_ld_weight_param());
     for(i =0; i <num_row; i++){                         //i would be the row number
         MatGetRow(m_ind_,i,&ncols_ind,&cols_ind,&vals_ind);             //ncols : number if non-zeros in the row
         MatGetRow(m_dis_,i,&ncols_dis,&cols_dis,&vals_dis);
@@ -261,7 +262,8 @@ void Loader::create_WA_matrix(Mat& m_NN_idx,Mat& m_NN_dis,Mat& m_WA,const std::s
 
     ETimer t_init_WA;
     CommonFuncs cf;
-    cf.set_weight_type(Config_params::getInstance()->get_ld_weight_type(), Config_params::getInstance()->get_ld_weight_param());
+    cf.set_weight_type(Config_params::getInstance()->get_ld_weight_type(),
+                       Config_params::getInstance()->get_ld_weight_param());
     for(i =0; i <num_row; i++){                         //i would be the row number
         MatGetRow(m_NN_idx,i,&ncols_ind,&cols_ind,&vals_ind);             //ncols : number if non-zeros in the row
         MatGetRow(m_NN_dis,i,&ncols_dis,&cols_dis,&vals_dis);

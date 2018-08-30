@@ -50,7 +50,6 @@ private:
     int         main_current_level_id;      //for export models
     int         multi_level_status;
     std::string exp_info;
-
     //======= NN ========
     int         nn_number_of_classes;
     int         nn_number_of_neighbors;
@@ -76,9 +75,12 @@ private:
     int         cs_max_coarse_level;    // Control parameter to stop
     int         cs_use_real_points;
     double      cs_weak_edges_ft;       // filter threshold for weak edges
-    bool        cs_boundary_points_status;  //0 means normal scenario, 1 means add boundary points
-    double      cs_boundary_points_threshold;       // min entropy for a fine point to be considered as boundary point between 0 and 1
-    int         cs_boundary_points_max_num;    // max number of fractions is going to add to each row of P matrix
+    //0 means normal scenario, 1 means add boundary points
+    bool        cs_boundary_points_status;
+    // min entropy for a fine point to be considered as boundary point (0~1)
+    double      cs_boundary_points_threshold;
+    // max number of fractions is going to add to each row of P matrix
+    int         cs_boundary_points_max_num;
     //======= Model selection ========
     int     ms_status;
     int     ms_limit;

@@ -471,15 +471,21 @@ void ModelSelection::add_debug_parameters(std::vector<ud_point>& v_initialized_p
 }
 
 
-void ModelSelection::uniform_design_separate_validation(Mat& m_train_data_p, Vec& v_train_vol_p, Mat& m_train_data_n, Vec& v_train_vol_n,
-                                                        bool inh_params, double param_C, double param_G, Mat& m_VD_p, Mat& m_VD_n, int level,
-                                                        solution & udc_sol, std::vector<ref_results>& v_ref_results){
-    // - - - -  Load validation data which is the training part of whole data in the beginning of the coarsening - - - -
+void ModelSelection::uniform_design_separate_validation(Mat& m_train_data_p,
+                            Vec& v_train_vol_p, Mat& m_train_data_n,
+                            Vec& v_train_vol_n, bool inh_params,
+                            double param_C, double param_G,
+                            Mat& m_VD_p, Mat& m_VD_n,
+                            int level, solution & udc_sol,
+                            std::vector<ref_results>& v_ref_results){
+    // - - - -  Load validation data which is the training part
+    //          of whole data in the beginning of the coarsening - - - -
     ETimer t_whole_UD;
     Loader ld;
     // - - - - set number of iterations in each stage - - - - -
 //    unsigned int num_iter_st1 = Config_params::getInstance()->get_ms_first_stage();
-    unsigned int num_iter_st1 = Config_params::getInstance()->get_ms_first_stage()  + 1; //+1 for one extra parameter to test
+    // +1 for one extra parameter to test
+    unsigned int num_iter_st1 = Config_params::getInstance()->get_ms_first_stage()  + 1;
     unsigned int num_iter_st2 = Config_params::getInstance()->get_ms_second_stage();
     // - - - - define required variables - - - - -
     std::vector<Solver> v_solver;       // vector of solvers for current fold_id

@@ -6,17 +6,21 @@
 #include "model_selection.h"
 #include "config_params.h"
 #include "common_funcs.h"
+#include <cassert>
 
 Config_params* Config_params::instance = NULL;
 
 int main(int argc, char **argv)
 {
     PetscInitialize(NULL, NULL, NULL, NULL);
-    Config_params::getInstance()->read_params("./params.xml", argc, argv);  // read parameters
+    Config_params::getInstance()->read_params("./params.xml",
+                                              argc, argv);  // read parameters
 
     Config_params::getInstance()->set_master_models_info();
-    int num_repeat_exp_ = Config_params::getInstance()->getInstance()->get_main_num_repeat_exp();
-    int num_kf_iter_ = Config_params::getInstance()->getInstance()->get_main_num_kf_iter();
+    int num_repeat_exp_ = Config_params::getInstance()->getInstance()
+                                            ->get_main_num_repeat_exp();
+    int num_kf_iter_ = Config_params::getInstance()->getInstance()
+                                            ->get_main_num_kf_iter();
     int total_iter_ = num_repeat_exp_ * num_kf_iter_;
     ETimer t_all;
 
@@ -44,7 +48,6 @@ int main(int argc, char **argv)
     int i=0;
     Config_params::getInstance()->set_main_current_kf_id(i);
     ETimer t_iteration;
-    printf("\n           ==================== Exp:%d, Iteration %d ==================== \n",r,i);
     Mat m_min_train_data,m_min_WA;
     Mat m_maj_train_data,m_maj_WA;
     Vec v_p_vol, v_n_vol;
@@ -57,7 +60,7 @@ int main(int argc, char **argv)
             m_maj_full_data, m_maj_full_NN_indices,
             m_maj_full_NN_dists,m_maj_WA,v_n_vol);
 //    exit(1);
-    //====================== create validation data ===============================
+    //====================== create validation data ===========================
     ETimer t_sample;
     Mat m_VD_p, m_VD_n;
     CommonFuncs cf;
@@ -71,6 +74,13 @@ int main(int argc, char **argv)
 
     t_sample.stop_timer("[MC] validation data is sampled from the finest training data");
 //    exit(1);
+
+    //====================== check test data file ===============================
+    assert(Config_params::getInstance()->get_test_ds_f_name() != "" &&
+           "Test file is not set, please use --test_data parameter!");
+    std::cout << "test file is set to "
+              << Config_params::getInstance()->get_test_ds_f_name()
+              << std::endl;
     //====================== Multilevel Solver ===============================
     ETimer t_solver;
     Mat m_P_minority, m_P_majority;

@@ -106,7 +106,8 @@ solution MainRecursion::main(Mat& p_data, Mat& m_P_p_f, Mat& p_WA, Vec& p_vol,
             p_coarser.calc_stat_nnz(p_WA,0, level, "minority");
 //            p_coarser.calc_stat_nnz(p_WA_c);
 
-            p_coarser.calc_real_weight(p_WA_c, p_data_c);       //recalculate the weights in adjacency matrix from the data
+            //recalculate the weights in adjacency matrix from the data
+            p_coarser.calc_real_weight(p_WA_c, p_data_c);       // @@083018
             p_coarser.filter_weak_edges(p_WA_c, filter_threshold, level);
 
 

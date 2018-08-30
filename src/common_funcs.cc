@@ -147,15 +147,17 @@ void CommonFuncs::set_weight_type(int new_weight_type, double aux_param){
 }
 
 double CommonFuncs::convert_distance_to_weight(double distance){
-    switch (weight_type) {
+    switch (this->weight_type) {
     case 1:                 //Flann default distance (square Euclidean distance)
-//        printf("[LD][CD] raw distance:%g, calculated distance:%g \n",distance, 1 / (sqrt(distance) + 0.00001 ));
+//        printf("[CF][CD2W] raw distance:%g, calculated distance:%g \n",distance,
+//        1 / (sqrt(distance) + 0.00001 ));
         return ( 1 / (sqrt(distance) + 0.00001 ) );    //
     case 2:                 // Gaussian distance)
         return ( exp((-1) * distance * weight_gamma)  );
     }
-
-    assert(0 && "the distance is not in range and unexpected output may generate!");
+    std::cout << "[CF][CD2W] weight_type :"
+              << this->weight_type << std::endl;
+    assert(0 && "the weight type is not in list of defined scenarios!");
 }
 
 

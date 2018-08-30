@@ -914,6 +914,8 @@ Mat Coarsening::calc_real_weight(Mat& m_WA_c, Mat& m_data_c) {
     MatDuplicate(m_WA_c,MAT_DO_NOT_COPY_VALUES, &m_tmp_WA); //create an empty matrix with same non zero structure
 
     CommonFuncs cf;
+    cf.set_weight_type(Config_params::getInstance()->get_ld_weight_type(),
+                       Config_params::getInstance()->get_ld_weight_param()); //added 083018
 
     const PetscInt    *cols_WA_c, *cols_dtc_i, *cols_dtc_k;
     const PetscScalar *vals_WA_c, *vals_dtc_i, *vals_dtc_k;
