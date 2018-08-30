@@ -17,3 +17,8 @@ get_vec_info: get_vec_info.o  chkopts
 getSubMatrix: ../preprocessor.o ../common_funcs.o getSubMatrix.o  chkopts
 	-${CLINKER} -o getSubMatrix  ../common_funcs.o ../preprocessor.o getSubMatrix.o ${PETSC_MAT_LIB}
 	${RM} -f getSubMatrix.o 
+
+getSubVector: ../preprocessor.o ../common_funcs.o getSubVector.o  chkopts
+	-${CLINKER} -o getSubVector  ../common_funcs.o ../preprocessor.o getSubVector.o ${PETSC_MAT_LIB} ${PETSC_VEC_LIB}
+	${RM} -f getSubVector.o 
+	

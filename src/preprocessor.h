@@ -22,6 +22,8 @@ public:
 //    void export_data();
     void getSubMatrixByRange(Mat& in_mat, Mat& subMatrix,
                               PetscInt start, PetscInt end);
+    void getSubVectorByRange(Vec& in_vec, Vec& subVector,
+                              PetscInt start, PetscInt end);
 
 };
 

@@ -209,6 +209,40 @@ void Preprocessor::getSubMatrixByRange(Mat& in_mat, Mat& subMatrix,
     ISDestroy(&isrow);
 }
 
+/*
+ * Notice the end is not part of return,
+ * example:
+ *  start=3, end=7  -> the subVector includes row 3, 4, 5, 6.
+ *  The 7th row is not included.
+ *
+ */
+void Preprocessor::getSubVectorByRange(Vec& in_vec, Vec& subVector,
+                                       PetscInt start, PetscInt end){
+    PetscInt        i=0, num_row=0, range= end-start;
+    PetscInt        *arr_ind;
+    IS              isrow;
+
+    VecGetSize(in_vec,&num_row);
+    printf("[PP][getSubVectorByRange] input vector length: %d \n",
+           num_row);
+
+    PetscMalloc1(range, &arr_ind);
+    for (i=start; i < end; i++){
+        arr_ind[i - start] = i;
+    }
+
+    ISCreateGeneral(PETSC_COMM_SELF,range,arr_ind,PETSC_COPY_VALUES,&isrow);
+    PetscFree(arr_ind);
+
+
+    VecGetSubVector(in_vec, isrow, &subVector);
+    VecGetSize(subVector,&num_row);
+    assert(num_row == range && "subvector size doesn't match with request");
+
+//    MatView(subMatrix,PETSC_VIEWER_STDOUT_WORLD);               //$$debug
+    ISDestroy(&isrow);
+}
+
 
 //void Preprocessor::separateData(Mat& data, const char * f_name){
 //    PetscViewer     viewer;               /* viewer */
