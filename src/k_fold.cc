@@ -4,7 +4,7 @@
 #include <cmath>
 #include "config_logs.h"
 #include "etimer.h"
-
+#include <cassert>
 //#include "model_selection.h"
 
 
@@ -1565,3 +1565,6 @@ void k_fold::free_resources(){
     MatDestroy(&this->m_maj_data_);
 
 }
+
+
+

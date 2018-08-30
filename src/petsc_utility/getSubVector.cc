@@ -52,7 +52,7 @@ int main(int argc,char **args)
 //    VecView(in_vector,PETSC_VIEWER_STDOUT_WORLD);                                //$$debug
     
     VecGetSize(in_vector, &num_row_data);
-    PetscPrintf(PETSC_COMM_WORLD," Input vector dim is:%dx%d\n", num_row_data);
+    PetscPrintf(PETSC_COMM_WORLD," Input vector lenght is:%d\n", num_row_data);
 
     Vec sub_vector;
     Preprocessor pp;

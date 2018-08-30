@@ -32,6 +32,7 @@
 #define dbl_KF_WOUT                 0           // Default 1 [write_output]                 //release 0
 #define dbl_KF_rdd                  0           // Default 0 [read divided data]
 #define dbl_KF_rfn                  0           // Default 0 [read full NN]
+#define dbl_KF_al2d                 0           // Default 0 [addLabel2Data]
 //---- Loader ----
 #define dbl_LD_LWAB                 0
 #define dbl_LD_LFB                  0           // 0 Default, load flann binary

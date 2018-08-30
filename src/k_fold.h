@@ -178,6 +178,7 @@ public:
     Mat get_m_maj_data(){ return m_maj_data_ ;}
     void free_resources();
 
+
 };
 
 #endif // K_FOLD_H

@@ -336,8 +336,11 @@ void Loader::create_WA_matrix(Mat& m_NN_idx,Mat& m_NN_dis,Mat& m_WA,const std::s
 
 
 
+/*
+ * Load normalized data for each class seperately
+ */
 
-Mat Loader::load_norm_data_sep(const std::string f_name){    //load normalized data for each class seperately
+Mat Loader::load_norm_data_sep(const std::string f_name){
     Mat             m_data_;
     PetscViewer     viewer_data_;
 

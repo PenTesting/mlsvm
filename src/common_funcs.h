@@ -68,6 +68,13 @@ public:
     std::string run_ext_command_single_output(const std::string ext_cmd);
 
     void get_unique_random_id(int start_range, int end_range, int number_random_id, std::string preferred_srand, std::vector<int>& v_rand_idx);
+
+    /*
+     * Add a label vector to the first column of data matrix
+     * Purpose: separate test data needs to have the labels in the first column.
+     */
+    void addLabel2Data(Mat& m_data, Vec& v_label, Mat& m_label_data);
+
 private:
     int weight_type=0;
     double weight_gamma=0;
