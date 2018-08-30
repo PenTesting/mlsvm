@@ -51,23 +51,26 @@ int main(int argc, char **argv)
     // r is the current experiment, i is the current iteration (k-fold id)
     Config_params::getInstance()->set_current_iter_file_names(r, i);
 
-    kf.prepare_data_using_separate_testdata(i,num_kf_iter_,m_min_full_data,m_min_train_data,
-                  m_min_full_NN_indices,m_min_full_NN_dists,m_min_WA,v_p_vol
-                  ,m_maj_full_data,m_maj_train_data,m_maj_full_NN_indices,
-                  m_maj_full_NN_dists,m_maj_WA,v_n_vol);
-    exit(1);
+    kf.prepare_data_using_separate_testdata(i,num_kf_iter_,
+            m_min_full_data, m_min_full_NN_indices,
+            m_min_full_NN_dists,m_min_WA,v_p_vol,
+            m_maj_full_data, m_maj_full_NN_indices,
+            m_maj_full_NN_dists,m_maj_WA,v_n_vol);
+//    exit(1);
     //====================== create validation data ===============================
     ETimer t_sample;
     Mat m_VD_p, m_VD_n;
     CommonFuncs cf;
-    m_VD_p = cf.sample_data(m_min_train_data,
+    m_VD_p = cf.sample_data(m_min_full_data,
                 Config_params::getInstance()->get_ms_VD_sample_size_fraction(),
                 Config_params::getInstance()->get_cpp_srand_seed());
-    m_VD_n = cf.sample_data(m_maj_train_data,
+//    exit(1);
+    m_VD_n = cf.sample_data(m_maj_full_data,
                 Config_params::getInstance()->get_ms_VD_sample_size_fraction(),
                 Config_params::getInstance()->get_cpp_srand_seed());
 
     t_sample.stop_timer("[MC] validation data is sampled from the finest training data");
+//    exit(1);
     //====================== Multilevel Solver ===============================
     ETimer t_solver;
     Mat m_P_minority, m_P_majority;
@@ -75,15 +78,16 @@ int main(int argc, char **argv)
     Config_params::getInstance()->set_timer_start_coarsening();
     // the test data file name is initialized in the constructor of MR class
     MainRecursion multilevel_solver;
-    multilevel_solver.main(m_min_train_data, m_P_minority,
-                           m_min_WA, v_p_vol, m_maj_train_data, m_P_majority, m_maj_WA,
-                           v_n_vol, m_VD_p, m_VD_n, 0, v_ref_results);
+    multilevel_solver.main(m_min_full_data, m_P_minority, m_min_WA, v_p_vol,
+                           m_maj_full_data, m_P_majority, m_maj_WA, v_n_vol,
+                           m_VD_p, m_VD_n, 0, v_ref_results);
+
+//    exit(1);
+
     Config_params::getInstance()->set_timer_end_refinement();
     Refinement rf;
     rf.add_best_model(v_ref_results);
     //free the matrices
-    MatDestroy(&m_min_train_data);
-    MatDestroy(&m_maj_train_data);
     MatDestroy(&m_min_WA);
     MatDestroy(&m_maj_WA);
     VecDestroy(&v_p_vol);

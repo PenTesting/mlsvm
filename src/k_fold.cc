@@ -1331,10 +1331,9 @@ void k_fold::prepare_data_for_iteration(int current_iteration,int total_iteratio
  */
 void k_fold::prepare_data_using_separate_testdata(
         int current_iteration,int total_iterations,
-        Mat& m_min_full_data, Mat& m_min_train_data,
-        Mat& m_min_full_NN_indices, Mat& m_min_full_NN_dists,
-        Mat& m_min_WA, Vec& v_min_vol, Mat& m_maj_full_data,
-        Mat& m_maj_train_data, Mat& m_maj_full_NN_indices,
+        Mat& m_min_full_data, Mat& m_min_full_NN_indices,
+        Mat& m_min_full_NN_dists, Mat& m_min_WA, Vec& v_min_vol,
+        Mat& m_maj_full_data, Mat& m_maj_full_NN_indices,
         Mat& m_maj_full_NN_dists,Mat& m_maj_WA,Vec& v_maj_vol){
 
     PetscInt    size_min_full_data;
@@ -1499,6 +1498,7 @@ void k_fold::extractk_NN(Mat& m_full_NN_indices,
     MatGetSize(m_full_NN_indices,&num_row, NULL);
 //    printf("[KF][FilterNN] number of rows in full NN indices matrix:");
 //    printf("%d, num_col_debug: %d \n",num_row_debug,num_col_debug);
+//    num_row = 5; // debug_should_remove comment 082918_1024
 
     PetscInt i=0, idx_ncols, dis_ncols;
     const PetscInt    *idx_cols, *dis_cols;
@@ -1511,23 +1511,34 @@ void k_fold::extractk_NN(Mat& m_full_NN_indices,
     MatCreateSeqAIJ(PETSC_COMM_SELF, num_row, required_num_NN ,
                     required_num_NN, PETSC_NULL, &m_filtered_NN_dists);
 
+
     for(i=0; i< num_row; i++){
         MatGetRow(m_full_NN_indices, i,
                   &idx_ncols,&idx_cols,&idx_vals);
         MatGetRow(m_full_NN_dists, i,
                   &dis_ncols,&dis_cols,&dis_vals);
         count_index = 0;
+        int dis_idx = 0;
         for(int index_col=0; index_col < idx_ncols ; index_col++){
             if(i != idx_vals[index_col]) {   //not a loop to itself
                 MatSetValue(m_filtered_NN_indices, i,
                             count_index, idx_vals[index_col], INSERT_VALUES);
+
+                // debug_should_remove comment 082918_1024
+//                std::cout << "count_index: "<< count_index
+//                          << ", dis_idx: "<< dis_idx
+//                          << ", dist_val:(" << dis_cols[index_col] << ","
+//                          << dis_vals[count_index] <<") \n";
+
                 MatSetValue(m_filtered_NN_dists, i,
-                            count_index, dis_vals[index_col], INSERT_VALUES);
-                ++count_index;
+                            count_index, dis_vals[count_index], INSERT_VALUES);
+                count_index++;
                 //stop adding more NN for this row(data point)
                 if(count_index == (required_num_NN )) break;
             }
+
         }
+
         MatRestoreRow(m_full_NN_dists, i,
                       &dis_ncols,&dis_cols,&dis_vals);
         MatRestoreRow(m_full_NN_indices, i,

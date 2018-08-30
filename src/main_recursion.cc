@@ -33,6 +33,9 @@ solution MainRecursion::main(Mat& p_data, Mat& m_P_p_f, Mat& p_WA, Vec& p_vol,
     MatGetSize(p_data, &p_num_row,0);    //m returns the number of rows globally
     MatGetSize(n_data, &n_num_row,0);    //m returns the number of rows globally
 
+//    printf("[MR][main] debug check input data num points P:%d, N:%d\n",
+//           p_num_row, n_num_row);      //$$debug
+//    exit(1);
     /// ----------------- Both classes are small enough, Now call the ModelSelection (Recursive Condition) -----------------
     if ((p_num_row <  c_limit) && (n_num_row <  c_limit))  {          //both classes are small enough (coarsest level)
 //                                                                                    $

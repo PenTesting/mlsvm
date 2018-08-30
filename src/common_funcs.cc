@@ -330,7 +330,9 @@ Mat CommonFuncs::sample_data(Mat& m_org_data, float sample_size_fraction, std::s
     // Random generator without duplicates
     PetscInt i, num_row_org_data;
     MatGetSize(m_org_data, &num_row_org_data, NULL);
-//    std::cout << "[CF][SampleData] number of rows in original data are: " << num_row_org_data << std::endl; //$$debug
+    std::cout << "[CF][SampleData] number of rows in original data are: "
+        << num_row_org_data << std::endl; //$$debug
+//    exit(1);
     std::vector<PetscInt> shuffled_indices_;
     shuffled_indices_.reserve(num_row_org_data);
 

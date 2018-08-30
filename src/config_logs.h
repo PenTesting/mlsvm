@@ -25,7 +25,7 @@
 #define dbl_KF_CVC                  0           // Default 0
 #define dbl_KF_CVS                  0           // Default 0
 #define dbl_KF_FN                   0           // Default 0
-#define dbl_KF_EK                   7           // Default 0
+#define dbl_KF_EK                   0           // Default 0
 #define dbl_KF_CTD                  0           // Default 0
 #define dbl_KF_CTC                  0           // Default 1 [combine_two_classes_in_one]   //release 0
 #define dbl_KF_PDFI                 0           // Default 1 [prepare_data_for_iteration]   //release 0
@@ -35,7 +35,7 @@
 //---- Loader ----
 #define dbl_LD_LWAB                 0
 #define dbl_LD_LFB                  0           // 0 Default, load flann binary
-#define dbl_LD_CWAM                 0           // 0 Default, create WA matrix using input NN matrices
+#define dbl_LD_CWAM                 3           // 0 Default, create WA matrix using input NN matrices
 #define dbl_LD_CD                   0           // 0 Default, 3 print raw and calculated distance
 #define dbl_LD_LNDS                 0           // 0 Default, 5 print size of data
 //---- Coarsening ----
@@ -47,7 +47,7 @@
 #define dbl_CO_calc_coarse_vol      0
 #define dbl_CO_FWE                  3           // filter weak edges (3 prints # filtered edges) //release 0
 //---- MainRecursion (Refinement) ----
-#define dbl_MR_main                 1           // 1 Default 3 level info //release 0
+#define dbl_MR_main                 3           // 1 Default 3 level info //release 0
 #define debug_level_main_rec        0           // 0 Default
 #define dbl_MR_refinement           1           // 1 Default
 
