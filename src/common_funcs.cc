@@ -468,13 +468,13 @@ void CommonFuncs::addLabel2Data(Mat& m_data, Vec& v_label, Mat& m_label_data){
     assert(num_col < 10000 && "The number of columns suggest a sparse matrix which is not supported now!");
 
     //+1 is for label
-    MatCreateSeqAIJ(PETSC_COMM_SELF,num_row , num_col + 1,
-                    (num_col + 1),PETSC_NULL, &m_label_data);
+    MatCreateSeqAIJ(PETSC_COMM_SELF, num_row , num_col + 1,
+                    (num_col + 1), PETSC_NULL, &m_label_data);
 
     // get an array of all labels
     PetscScalar     *arr_lbl;
     VecGetArray(v_label,&arr_lbl);
-
+    num_row = 5;
     for(i =0; i < num_row ; i++){
         //Insert lable
         MatSetValue(m_label_data, i, 0, arr_lbl[i],INSERT_VALUES);
@@ -486,7 +486,7 @@ void CommonFuncs::addLabel2Data(Mat& m_data, Vec& v_label, Mat& m_label_data){
         MatRestoreRow(m_data,i,&ncols,&cols,&vals);
     }
     VecRestoreArray(v_label,&arr_lbl);
-
+    exit(1);
 #if dbl_KF_al2d > 7
     PetscViewer     viewer;
     PetscViewerBinaryOpen(PETSC_COMM_WORLD,"addLabel2Data.dat",
