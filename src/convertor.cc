@@ -66,17 +66,18 @@ PetscInt Convertor::get_num_columns(std::string in_file_name){
 }
 
 void Convertor::Libsvm_file_to_PETSc_format(std::string in_file_name, Mat& m_data, Vec& v_lbl, PetscInt num_row, PetscInt num_col){
+    std::string full_input_filename = in_file_name + ".libsvm";
     if(num_row == -1)
-        num_row = get_num_rows(in_file_name);
+        num_row = get_num_rows(full_input_filename);
     if(num_col == -1)
-        num_col = get_num_columns(in_file_name);
+        num_col = get_num_columns(full_input_filename);
 
     std::cout << "row: " << num_row << ", col: " << num_col << std::endl;
 
     VecCreateSeq(PETSC_COMM_SELF,num_row,&v_lbl);
     MatCreateSeqAIJ(PETSC_COMM_SELF,num_row ,num_col ,num_col ,PETSC_NULL, &m_data);
     //read the file withlibsvm format
-    std::ifstream file(in_file_name);
+    std::ifstream file(full_input_filename);
     std::string str;
     PetscInt curr_row=0;
     while (std::getline(file, str))
