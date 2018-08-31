@@ -358,7 +358,6 @@ void Config_params::read_classification_training_parameters(pugi::xml_node& root
     check_input_distance_parameters();
 //    std::cout << "[CP] input parameters are read" << std::endl;
     std::cout << "[CP] test name:" << get_test_name() << std::endl;
-    std::cout << "[CP] test data name:" << get_test_data_name() << std::endl;
 }
 
 
