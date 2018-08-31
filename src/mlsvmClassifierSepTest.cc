@@ -52,7 +52,7 @@ int main(int argc, char **argv)
     Mat m_maj_train_data,m_maj_WA;
     Vec v_p_vol, v_n_vol;
     // r is the current experiment, i is the current iteration (k-fold id)
-    Config_params::getInstance()->set_current_iter_file_names(r, i);
+//    Config_params::getInstance()->set_current_iter_file_names(r, i);
 
     kf.prepare_data_using_separate_testdata(i,num_kf_iter_,
             m_min_full_data, m_min_full_NN_indices,
@@ -78,7 +78,7 @@ int main(int argc, char **argv)
     //====================== check test data file ===============================
     assert(Config_params::getInstance()->get_test_ds_f_name() != "" &&
            "Test file is not set, please use --test_data parameter!");
-    std::cout << "test file is set to "
+    std::cout << "[main] test file is set to "
               << Config_params::getInstance()->get_test_ds_f_name()
               << std::endl;
     //====================== Multilevel Solver ===============================

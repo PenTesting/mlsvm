@@ -139,7 +139,8 @@ void Config_params::print_zscore_params(){
                  "\ntmp_path: "             << get_tmp_path()          << std::endl;
 }
 
-void Config_params::read_params(std::string XML_FILE_PATH,int argc, char * argv[], program_parts caller_func){
+void Config_params::read_params(std::string XML_FILE_PATH,
+                                int argc, char * argv[], program_parts caller_func){
 
     PetscBool       flg; //@ 040417-2130
     PetscInt        temp;
@@ -152,7 +153,6 @@ void Config_params::read_params(std::string XML_FILE_PATH,int argc, char * argv[
 
     if(caller_func == program_parts::main){
         PetscOptionsGetInt(NULL,NULL,"-d",&main_function,&flg);			//newer versions of  PETSc
-//        PetscOptionsGetInt(NULL,"-d",&main_function,&flg);			//older than 3.7 versions of  PETSc
         if (!flg){
 //            PetscPrintf(PETSC_COMM_WORLD,"[CP] Must indicate the functionality type you need using -d . \nExit!\n");
 //            exit(1);
@@ -185,7 +185,8 @@ void Config_params::read_params(std::string XML_FILE_PATH,int argc, char * argv[
         switch(main_function){
         case 0:     // classification
             read_classification_training_parameters(root, argc, argv);
-            set_inputs_file_names();
+            // 083018 commented here and moved to mlsvm_classifier.cc
+//            set_inputs_file_names();
             print_classification_training_params();
             break;
 
@@ -561,6 +562,22 @@ void Config_params::set_inputs_file_names(){
     p_norm_data_f_name  = get_tmp_path() +"kfold_min_train_"+get_exp_info();
     n_norm_data_f_name  = get_tmp_path() +"kfold_maj_train_"+get_exp_info();
     test_ds_f_name      = get_tmp_path() +"kfold_test_data_"+get_exp_info();
+}
+
+/*
+ * for the case that there is no k-fold and the test data is provided
+ * for mlsvmSepTestClassifier
+ * Added 083018
+ */
+void Config_params::set_fixed_file_names(){
+    p_indices_f_name    = get_ds_path() + get_ds_name() + "_min_norm_data_indices.dat";
+    p_dist_f_name       = get_ds_path() + get_ds_name() + "_min_norm_data_dists.dat";
+    n_indices_f_name    = get_ds_path() + get_ds_name() + "_maj_norm_data_indices.dat";
+    n_dist_f_name       = get_ds_path() + get_ds_name() + "_maj_norm_data_dists.dat";
+
+    p_norm_data_f_name  = get_ds_path() + get_ds_name() + "_min_norm_data.dat";
+    n_norm_data_f_name  = get_ds_path() + get_ds_name() + "_maj_norm_data.dat";
+    test_ds_f_name      = get_ds_path() + get_test_ds_f_name() + "_label_data_test.dat";
 }
 
 
