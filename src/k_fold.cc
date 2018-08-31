@@ -1330,7 +1330,6 @@ void k_fold::prepare_data_for_iteration(int current_iteration,int total_iteratio
  *
  */
 void k_fold::prepare_data_using_separate_testdata(
-        int current_iteration,int total_iterations,
         Mat& m_min_full_data, Mat& m_min_full_NN_indices,
         Mat& m_min_full_NN_dists, Mat& m_min_WA, Vec& v_min_vol,
         Mat& m_maj_full_data, Mat& m_maj_full_NN_indices,

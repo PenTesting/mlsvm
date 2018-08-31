@@ -570,6 +570,7 @@ void Config_params::set_inputs_file_names(){
  * Added 083018
  */
 void Config_params::set_fixed_file_names(){
+    std::cout << "Config_params::set_fixed_file_names is called" << std::endl;
     p_indices_f_name    = get_ds_path() + get_ds_name() + "_min_norm_data_indices.dat";
     p_dist_f_name       = get_ds_path() + get_ds_name() + "_min_norm_data_dists.dat";
     n_indices_f_name    = get_ds_path() + get_ds_name() + "_maj_norm_data_indices.dat";

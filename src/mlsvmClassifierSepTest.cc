@@ -17,11 +17,12 @@ int main(int argc, char **argv)
                                               argc, argv);  // read parameters
 
     Config_params::getInstance()->set_master_models_info();
-    int num_repeat_exp_ = Config_params::getInstance()->getInstance()
-                                            ->get_main_num_repeat_exp();
-    int num_kf_iter_ = Config_params::getInstance()->getInstance()
-                                            ->get_main_num_kf_iter();
-    int total_iter_ = num_repeat_exp_ * num_kf_iter_;
+    Config_params::getInstance()->Config_params::set_fixed_file_names();
+//    int num_repeat_exp_ = Config_params::getInstance()->getInstance()
+//                                            ->get_main_num_repeat_exp();
+//    int num_kf_iter_ = Config_params::getInstance()->getInstance()
+//                                            ->get_main_num_kf_iter();
+//    int total_iter_ = num_repeat_exp_ * num_kf_iter_;
     ETimer t_all;
 
     // load data files
@@ -54,7 +55,7 @@ int main(int argc, char **argv)
     // r is the current experiment, i is the current iteration (k-fold id)
 //    Config_params::getInstance()->set_current_iter_file_names(r, i);
 
-    kf.prepare_data_using_separate_testdata(i,num_kf_iter_,
+    kf.prepare_data_using_separate_testdata(
             m_min_full_data, m_min_full_NN_indices,
             m_min_full_NN_dists,m_min_WA,v_p_vol,
             m_maj_full_data, m_maj_full_NN_indices,
@@ -122,11 +123,8 @@ int main(int argc, char **argv)
     MatDestroy(&m_maj_full_NN_dists);
 
 #if dbl_exp_train_data == 0
-    std::cout << "[MC] End of all experiments\n" ;
     Config_params::getInstance()->print_final_results();
-
     t_all.stop_timer("[MC] Whole test including all iterations");
-    printf("[MC] Total number of iterations:%d \n",total_iter_);
 
 #if export_SVM_models == 1
     Config_params::getInstance()->export_models_metadata();
