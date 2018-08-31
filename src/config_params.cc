@@ -357,7 +357,7 @@ void Config_params::read_classification_training_parameters(pugi::xml_node& root
 //    set_inputs_file_names();           // set all the dataset files        //because of exp_info, file name's should set after parsing the argv
     check_input_distance_parameters();
 //    std::cout << "[CP] input parameters are read" << std::endl;
-    std::cout << "[CP] test name:" << get_test_name() << std::endl;
+//    std::cout << "[CP] test name:" << get_test_name() << std::endl;
 }
 
 
@@ -580,9 +580,9 @@ void Config_params::set_fixed_file_names(){
     p_norm_data_f_name  = get_ds_path() + get_ds_name() + "_min_norm_data.dat";
     n_norm_data_f_name  = get_ds_path() + get_ds_name() + "_maj_norm_data.dat";
 
-//    test_ds_f_name      = get_ds_path() + get_test_ds_f_name() + "_label_data_test.dat";
-//    std::cout << "get_test_ds_f_name(): " << get_test_ds_f_name() << "\n\n";
-//    exit (1);
+    test_ds_f_name      = get_ds_path() + get_test_name() + "_label_data_test.dat";
+    std::cout << "get_test_ds_f_name(): " << get_test_ds_f_name() << "\n\n";
+    exit (1);
 }
 
 
