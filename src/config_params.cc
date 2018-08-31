@@ -313,7 +313,7 @@ void Config_params::read_classification_training_parameters(pugi::xml_node& root
     parser_.add_option("-u", "--exp_info")                   .dest("exp_info")  .set_default(exp_info);
     parser_.add_option("--ds_p")                             .dest("ds_path")  .set_default(ds_path);
     parser_.add_option("-f", "--ds_f", "--file")             .dest("ds_name")  .set_default(ds_name);
-    parser_.add_option("--test_data")                        .dest("test_data_name")  .set_default(ds_name);
+    parser_.add_option("--test_data")                        .dest("test_data_name")  .set_default(test_data_name);
     parser_.add_option("--tmp_p")                            .dest("tmp_path")  .set_default(tmp_path);
     parser_.add_option("--cs_pi")                            .dest("pre_init_loader_matrix")  .set_default(pre_init_loader_matrix);
 //    parser_.add_option("--iw", "--inverse_weight")           .dest("inverse_weight")  .set_default(inverse_weight);
@@ -357,7 +357,8 @@ void Config_params::read_classification_training_parameters(pugi::xml_node& root
 //    set_inputs_file_names();           // set all the dataset files        //because of exp_info, file name's should set after parsing the argv
     check_input_distance_parameters();
 //    std::cout << "[CP] input parameters are read" << std::endl;
-    std::cout << "[CP] test data name:" << get_test_name() << std::endl;
+    std::cout << "[CP] test name:" << get_test_name() << std::endl;
+    std::cout << "[CP] test data name:" << get_test_data_name() << std::endl;
 }
 
 
