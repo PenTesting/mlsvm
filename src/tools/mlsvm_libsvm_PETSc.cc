@@ -12,8 +12,7 @@ int main(int argc, char **argv){
     Mat A;
     Vec lbl;
     std::string str_in_fname = Config_params::getInstance()->get_ds_path()
-                        + Config_params::getInstance()->get_ds_name()
-                        + ".libsvm";
+                        + Config_params::getInstance()->get_ds_name();
     Convertor cv;
     cv.Libsvm_file_to_PETSc_format( str_in_fname, A,lbl);
 
