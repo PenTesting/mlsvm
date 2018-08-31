@@ -313,7 +313,6 @@ void Config_params::read_classification_training_parameters(pugi::xml_node& root
     parser_.add_option("-u", "--exp_info")                   .dest("exp_info")  .set_default(exp_info);
     parser_.add_option("--ds_p")                             .dest("ds_path")  .set_default(ds_path);
     parser_.add_option("-f", "--ds_f", "--file")             .dest("ds_name")  .set_default(ds_name);
-    parser_.add_option("--test_data")                        .dest("test_ds_f_name")  .set_default("");
     parser_.add_option("--tmp_p")                            .dest("tmp_path")  .set_default(tmp_path);
     parser_.add_option("--cs_pi")                            .dest("pre_init_loader_matrix")  .set_default(pre_init_loader_matrix);
 //    parser_.add_option("--iw", "--inverse_weight")           .dest("inverse_weight")  .set_default(inverse_weight);
@@ -349,7 +348,7 @@ void Config_params::read_classification_training_parameters(pugi::xml_node& root
     // - - - Tools - - -
     parser_.add_option("--sat_p")                            .dest("p_norm_data_f_name")     .set_default("");
     parser_.add_option("--sat_n")                            .dest("n_norm_data_f_name")     .set_default("");
-    parser_.add_option("--sap_td")                           .dest("test_ds_f_name")     .set_default("");
+    parser_.add_option("--sap_td", "--test_data")            .dest("test_ds_f_name")     .set_default("");
     parser_.add_option("-d")                                 .dest("tmp");
 
     this->options_ = parser_.parse_args(argc, argv);
@@ -579,6 +578,8 @@ void Config_params::set_fixed_file_names(){
     p_norm_data_f_name  = get_ds_path() + get_ds_name() + "_min_norm_data.dat";
     n_norm_data_f_name  = get_ds_path() + get_ds_name() + "_maj_norm_data.dat";
     test_ds_f_name      = get_ds_path() + get_test_ds_f_name() + "_label_data_test.dat";
+    std::cout << "get_test_ds_f_name(): " << get_test_ds_f_name() << "\n\n";
+    exit (1);
 }
 
 
