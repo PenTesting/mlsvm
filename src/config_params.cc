@@ -582,6 +582,7 @@ void Config_params::set_fixed_file_names(){
 
     test_ds_f_name      = get_ds_path() + get_test_name() + "_label_data_test.dat";
 //    std::cout << "get_test_ds_f_name(): " << get_test_ds_f_name() << "\n\n";
+//    exit (1);
 }
 
 

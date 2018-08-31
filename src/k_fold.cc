@@ -48,7 +48,8 @@ void k_fold::read_in_divided_data(Mat& m_min_data, Mat& m_maj_data){
     ETimer t_all;
 
     std::string prefix = Config_params::getInstance()->get_ds_path() + "/" + Config_params::getInstance()->get_ds_name();
-//    std::cout << "[k_fold] prefix: " << prefix << std::endl;
+    std::cout << "[k_fold] prefix: " << prefix << std::endl;
+    exit(1);
     std::string min_full_data {prefix + "_min_norm_data.dat"}; // add the dataset name
     std::string maj_full_data {prefix + "_maj_norm_data.dat"};
 #if dbl_KF_rdd >= 1
