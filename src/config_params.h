@@ -175,7 +175,7 @@ public:
     void update_srand_seed();
     void debug_only_set_srand_seed(std::string new_seed);
 
-    const std::string &get_ds_path()    const { return options_["ds_path"]+ "/";}
+    const std::string &get_ds_path()    const { return options_["ds_path"];}
     const std::string &get_ds_name()    const { return options_["ds_name"];}
     const std::string &get_test_name()    const { return options_["test_data_name"];}
     std::string get_tmp_path()   const ;
